@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void validate(String userName, String password) {
-        if((userName.equals("admin")) && (password.equals("2019"))) {
+        if((userName.equals("admin")) && (password.equals("1998"))) {
             Toast.makeText(getApplicationContext(),
                     "Redirecting...",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, HomeScreen.class);
