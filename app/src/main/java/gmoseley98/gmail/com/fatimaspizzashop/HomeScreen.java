@@ -40,8 +40,9 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //  Changed intentOrder to point to LogOrderMain
     public void openPlaceOrder() {
-        Intent intentOrder = new Intent(this, PlaceOrder.class);
+        Intent intentOrder = new Intent(this, LogOrderMain.class);
         startActivity(intentOrder);
     }
 }
