@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private TextView info;
     private Button login;
-    private int counter = 5;
+    private int counter = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.infoTextView);
         login = (Button) findViewById(R.id.loginBtn);
 
-        info.setText("Number of attempts remaining: 5");
+        info.setText("Number of attempts remaining: 3");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
