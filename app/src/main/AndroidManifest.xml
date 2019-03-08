@@ -15,7 +15,6 @@
         <activity android:name=".LogDeliveryOrder" />
         <activity android:name=".LogOrderMain" />
         <activity android:name=".DailyReport" />
-        <activity android:name=".PlaceOrder" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".MainActivity">
             <intent-filter>
