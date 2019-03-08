@@ -20,7 +20,6 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
     private RadioGroup pizzaSizeRadGroup;
     private RadioButton sizeMediumRadBtn, sizeLargeRadBtn;
 
-    private Button extraToppingsBtn;
     private Button nextBtn;
 
     @Override
@@ -53,11 +52,12 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
             }
         });
 
-        extraToppingsBtn = (Button) findViewById(R.id.extraToppingsBtn);
-        extraToppingsBtn.setOnClickListener((new View.OnClickListener() {
+        nextBtn = (Button) findViewById(R.id.nextBtn);
+        nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openExtraToppings();
+
+             openExtraToppings();
             }
         }));
     }

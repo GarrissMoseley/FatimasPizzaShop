@@ -9,7 +9,7 @@ import android.widget.Button;
 public class HomeScreen extends AppCompatActivity {
 
     private Button dailyReport;
-    private Button placeOrder;
+    private Button logOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         
         dailyReport = (Button) findViewById(R.id.dailyReportBtn);
-        placeOrder = (Button) findViewById(R.id.orderBtn);
+        logOrder = (Button) findViewById(R.id.orderBtn);
 
         dailyReport.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -27,10 +27,10 @@ public class HomeScreen extends AppCompatActivity {
         }
         );
 
-        placeOrder.setOnClickListener(new View.OnClickListener() {
+        logOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPlaceOrder();
+                openLogOrder();
             }
         });
     }
@@ -41,7 +41,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     //  Changed intentOrder to point to LogOrderMain
-    public void openPlaceOrder() {
+    public void openLogOrder() {
         Intent intentOrder = new Intent(this, LogOrderMain.class);
         startActivity(intentOrder);
     }

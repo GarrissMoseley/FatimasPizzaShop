@@ -41,8 +41,18 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
     }
 
     public void finishOrder() {
+        if(cardNumEditText.getText().toString() != ""
+                && nameEditText.getText().toString() != ""
+                && securityNumEditText.getText().toString() != ""
+                && expDateEditText.getText().toString() != "") {
 
-        Intent intent = new Intent(this, HomeScreen.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, HomeScreen.class);
+            startActivity(intent);
+        }
+        else {
+
+            Toast.makeText(getApplicationContext(),
+                    "Please complete all fields", Toast.LENGTH_LONG).show();
+        }
     }
 }
