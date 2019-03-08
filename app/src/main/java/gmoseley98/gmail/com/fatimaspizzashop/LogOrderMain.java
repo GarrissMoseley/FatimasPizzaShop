@@ -4,8 +4,10 @@
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class LogOrderMain extends AppCompatActivity {
@@ -22,5 +24,38 @@ public class LogOrderMain extends AppCompatActivity {
         delivery = (Button) findViewById(R.id.deliveryBtn);
         inHouse = (Button) findViewById(R.id.inHouseBtn);
         takeOut = (Button) findViewById(R.id.takeOutBtn);
+
+        delivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDeliveryInfo();
+            }
+        });
+
+        inHouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPizzaSelection();
+            }
+        });
+
+        takeOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPizzaSelection();
+            }
+        });
+    }
+
+    public void openDeliveryInfo() {
+
+        Intent intent = new Intent(this, LogOrderDeliveryInfo.class);
+        startActivity(intent);
+    }
+
+    public void openPizzaSelection() {
+
+        Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+        startActivity(intent);
     }
 }

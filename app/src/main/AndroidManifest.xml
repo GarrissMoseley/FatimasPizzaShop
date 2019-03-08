@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogDeliveryOrder"></activity>
+        <activity android:name=".LogOrderExtraToppings"></activity>
+        <activity android:name=".LogOrderPizzaSelection" />
+        <activity android:name=".LogOrderDeliveryInfo" />
+        <activity android:name=".LogDeliveryOrder" />
         <activity android:name=".LogOrderMain" />
         <activity android:name=".DailyReport" />
-        <activity android:name=".PlaceOrder" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".MainActivity">
             <intent-filter>
