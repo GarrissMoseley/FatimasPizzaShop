@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogOrderExtraToppings"></activity>
+        <activity android:name=".PaymentSelectPayment"></activity>
+        <activity android:name=".LogOrderExtraToppings" />
         <activity android:name=".LogOrderPizzaSelection" />
         <activity android:name=".LogOrderDeliveryInfo" />
         <activity android:name=".LogDeliveryOrder" />
