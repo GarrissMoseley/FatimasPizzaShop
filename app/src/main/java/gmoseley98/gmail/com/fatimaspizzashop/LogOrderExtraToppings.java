@@ -4,8 +4,11 @@
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 
 public class LogOrderExtraToppings extends AppCompatActivity {
@@ -13,6 +16,8 @@ public class LogOrderExtraToppings extends AppCompatActivity {
     private CheckBox mushroomsChkBox, onionsChkBox, grnPeppersChkBox,
             jalapenosChkBox, beefChkBox, chickenChkBox, sausageChkBox,
             pineappleChkBox, hamChkBox, spinachChkBox;
+
+    private Button okBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +34,21 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         pineappleChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         hamChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         spinachChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
+
+        okBtn = (Button) findViewById(R.id.okBtn);
+
+        okBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openPaymentSelection();
+            }
+        }));
+    }
+
+    public void openPaymentSelection() {
+
+        Intent intent = new Intent(this, PaymentSelectPayment.class);
+        startActivity(intent);
     }
 }

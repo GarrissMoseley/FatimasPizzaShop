@@ -42,13 +42,13 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
                 && address.getText().toString().equals("")
                 && phoneNumber.getText().toString().equals("")) {
 
-            Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            startActivity(intent);
+            Toast.makeText(getApplicationContext(),
+                    "Please complete all fields", Toast.LENGTH_LONG).show();
         }
         else {
 
-            Toast.makeText(getApplicationContext(),
-                    "Please complete all fields", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+            startActivity(intent);
         }
     }
 }
