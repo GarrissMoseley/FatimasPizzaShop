@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class LogOrderPizzaSelection extends AppCompatActivity {
 
@@ -21,6 +22,9 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
     private RadioButton sizeMediumRadBtn, sizeLargeRadBtn;
 
     private Button nextBtn;
+
+    private boolean pizzaTypeSelected = false;
+    private boolean pizzaSizeSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                pizzaTypeSelected = true;
             }
         });
 
@@ -49,6 +54,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                pizzaSizeSelected = true;
             }
         });
 
@@ -56,8 +62,28 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(pizzaTypeSelected && pizzaSizeSelected) {
 
-             openExtraToppings();
+                    openExtraToppings();
+                }
+                else if(!pizzaTypeSelected && !pizzaSizeSelected){
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please select pizza type and size",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if(!pizzaTypeSelected && pizzaSizeSelected) {
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please select pizza type",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if(pizzaTypeSelected && !pizzaSizeSelected) {
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please select pizza size",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         }));
     }

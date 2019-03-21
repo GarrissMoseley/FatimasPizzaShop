@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class PaymentSelectPayment extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
 
     private Button nextBtn;
 
-    private Intent intent;
+    private Intent intent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,28 @@ public class PaymentSelectPayment extends AppCompatActivity {
         nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(priceEntered() && intent != null) {
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
+                else if(!priceEntered() && intent == null){
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please select payment type and enter order price",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if(!priceEntered() && intent != null) {
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter order price",
+                            Toast.LENGTH_LONG).show();
+                }
+                else if(priceEntered() && intent == null) {
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please select payment type",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         }));
     }
@@ -68,5 +89,24 @@ public class PaymentSelectPayment extends AppCompatActivity {
     public void cashSelected() {
 
         intent = new Intent(this, HomeScreen.class);
+    }
+
+    public boolean priceEntered() {
+
+        boolean priceEntered = false;
+
+        if(!priceEditText.getText().toString().equals("")) {
+
+            priceEntered = true;
+        }
+
+        if(priceEntered) {
+
+            return true;
+        }
+        else {
+
+            return false;
+        }
     }
 }

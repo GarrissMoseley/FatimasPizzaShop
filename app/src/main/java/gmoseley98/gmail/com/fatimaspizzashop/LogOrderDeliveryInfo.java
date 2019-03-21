@@ -38,17 +38,46 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
     }
 
     public void openPizzaSelection() {
-        if(name.getText().toString().equals("")
-                && address.getText().toString().equals("")
-                && phoneNumber.getText().toString().equals("")) {
+        if(allFieldsFilled()) {
+
+            Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+            startActivity(intent);
+        }
+        else {
 
             Toast.makeText(getApplicationContext(),
                     "Please complete all fields", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public boolean allFieldsFilled() {
+
+        boolean nameEntered = false;
+        boolean addressEntered = false;
+        boolean phoneNumberEntered = false;
+
+        if(!name.getText().toString().equals("")) {
+
+            nameEntered = true;
+        }
+        if(!address.getText().toString().equals("")) {
+
+            addressEntered = true;
+        }
+        if(!phoneNumber.getText().toString().equals("")) {
+
+            phoneNumberEntered = true;
+        }
+
+        if(nameEntered
+                && addressEntered
+                && phoneNumberEntered) {
+
+            return true;
+        }
         else {
 
-            Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            startActivity(intent);
+            return false;
         }
     }
 }

@@ -17,7 +17,7 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             jalapenosChkBox, beefChkBox, chickenChkBox, sausageChkBox,
             pineappleChkBox, hamChkBox, spinachChkBox;
 
-    private Button okBtn;
+    private Button nextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         hamChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         spinachChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
 
-        okBtn = (Button) findViewById(R.id.okBtn);
+        nextBtn = (Button) findViewById(R.id.nextBtn);
 
-        okBtn.setOnClickListener((new View.OnClickListener() {
+        nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
