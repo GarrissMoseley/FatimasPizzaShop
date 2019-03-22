@@ -46,6 +46,18 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         }));
     }
 
+    public void onCheckClicked(View view) {
+
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.mushroomsChkBox:
+                if(checked) {
+
+                }
+        }
+    }
+
     public void openPaymentSelection() {
 
         Intent intent = new Intent(this, PaymentSelectPayment.class);

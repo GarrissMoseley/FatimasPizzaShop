@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 public class LogOrderDeliveryInfo extends AppCompatActivity {
 
-    private EditText name, address, phoneNumber;
+    private Delivery order = new Delivery();
+
+    private EditText nameEditText, addressEditText, phoneNumberEditText;
 
     private Button nextBtn;
 
@@ -23,9 +25,9 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_delivery_info);
 
-        name  = (EditText) findViewById(R.id.nameEditText);
-        address = (EditText) findViewById(R.id.addressEditText);
-        phoneNumber = (EditText) findViewById(R.id.phoneNumberEditText);
+        nameEditText  = (EditText) findViewById(R.id.nameEditText);
+        addressEditText = (EditText) findViewById(R.id.addressEditText);
+        phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
 
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
@@ -40,7 +42,9 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
     public void openPizzaSelection() {
         if(allFieldsFilled()) {
 
+
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+            intent.putExtra("order_parcel_data", order);
             startActivity(intent);
         }
         else {
@@ -56,15 +60,15 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         boolean addressEntered = false;
         boolean phoneNumberEntered = false;
 
-        if(!name.getText().toString().equals("")) {
+        if(!nameEditText.getText().toString().equals("")) {
 
             nameEntered = true;
         }
-        if(!address.getText().toString().equals("")) {
+        if(!addressEditText.getText().toString().equals("")) {
 
             addressEntered = true;
         }
-        if(!phoneNumber.getText().toString().equals("")) {
+        if(!phoneNumberEditText.getText().toString().equals("")) {
 
             phoneNumberEntered = true;
         }
@@ -72,6 +76,10 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         if(nameEntered
                 && addressEntered
                 && phoneNumberEntered) {
+
+            order.setName(nameEditText.getText().toString());
+            order.setAddress(addressEditText.getText().toString());
+            order.setPhoneNumber(phoneNumberEditText.getText().toString());
 
             return true;
         }

@@ -1,3 +1,7 @@
+/********************************
+ * Author: Ethan Rimer
+ * Class Name: LogOrderInHouseInfo
+ ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
 import android.content.Intent;

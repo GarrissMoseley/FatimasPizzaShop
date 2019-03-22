@@ -12,36 +12,37 @@ import android.widget.Button;
 
 public class LogOrderMain extends AppCompatActivity {
 
-    private Button delivery;
-    private Button inHouse;
-    private Button takeOut;
+    private Button deliveryBtn, inHouseBtn, takeOutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_main);
 
-        delivery = (Button) findViewById(R.id.deliveryBtn);
-        inHouse = (Button) findViewById(R.id.inHouseBtn);
-        takeOut = (Button) findViewById(R.id.takeOutBtn);
+        deliveryBtn = (Button) findViewById(R.id.deliveryBtn);
+        inHouseBtn = (Button) findViewById(R.id.inHouseBtn);
+        takeOutBtn = (Button) findViewById(R.id.takeOutBtn);
 
-        delivery.setOnClickListener(new View.OnClickListener() {
+        deliveryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openDeliveryInfo();
             }
         });
 
-        inHouse.setOnClickListener(new View.OnClickListener() {
+        inHouseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openInHouseInfo();
             }
         });
 
-        takeOut.setOnClickListener(new View.OnClickListener() {
+        takeOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openTakeoutInfo();
             }
         });

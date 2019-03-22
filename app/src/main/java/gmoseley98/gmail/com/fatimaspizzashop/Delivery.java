@@ -4,10 +4,43 @@
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Delivery extends Order {
 
     private String address = "";
     private String phoneNumber = "";
+
+    public Delivery() {
+
+    }
+
+    public Delivery(Parcel in) {
+
+        super(in);
+        address = in.readString();
+        phoneNumber = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        super.writeToParcel(dest, flags);
+        dest.writeString(address);
+        dest.writeString(phoneNumber);
+    }
+
+    public static final Parcelable.Creator<Delivery> CREATOR
+            = new Parcelable.Creator<Delivery>() {
+        public Delivery createFromParcel(Parcel in) {
+            return new Delivery(in);
+        }
+
+        public Delivery[] newArray(int size) {
+            return new Delivery[size];
+        }
+    };
 
     public void setAddress(String Address) {
 
