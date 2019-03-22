@@ -35,14 +35,14 @@ public class LogOrderMain extends AppCompatActivity {
         inHouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPizzaSelection();
+                openInHouseInfo();
             }
         });
 
         takeOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPizzaSelection();
+                openTakeoutInfo();
             }
         });
     }
@@ -53,9 +53,15 @@ public class LogOrderMain extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openPizzaSelection() {
+    public void openInHouseInfo() {
 
-        Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+        Intent intent = new Intent(this, LogOrderInHouseInfo.class);
+        startActivity(intent);
+    }
+
+    public void openTakeoutInfo() {
+
+        Intent intent = new Intent(this, LogOrderTakeoutInfo.class);
         startActivity(intent);
     }
 }
