@@ -56,13 +56,6 @@ public class LogOrderInHouseInfo extends AppCompatActivity {
             nameEntered = true;
         }
 
-        if(nameEntered) {
-
-            return true;
-        }
-        else {
-
-            return false;
-        }
+        return nameEntered;
     }
 }

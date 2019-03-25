@@ -44,7 +44,7 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
 
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            intent.putExtra("order_parcel_data", order);
+            intent.putExtra("delivery_parcel_data", order);
             startActivity(intent);
         }
         else {
@@ -63,29 +63,22 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         if(!nameEditText.getText().toString().equals("")) {
 
             nameEntered = true;
+
+            order.setName(nameEditText.getText().toString());
         }
         if(!addressEditText.getText().toString().equals("")) {
 
             addressEntered = true;
+
+            order.setAddress(addressEditText.getText().toString());
         }
         if(!phoneNumberEditText.getText().toString().equals("")) {
 
             phoneNumberEntered = true;
-        }
 
-        if(nameEntered
-                && addressEntered
-                && phoneNumberEntered) {
-
-            order.setName(nameEditText.getText().toString());
-            order.setAddress(addressEditText.getText().toString());
             order.setPhoneNumber(phoneNumberEditText.getText().toString());
-
-            return true;
         }
-        else {
 
-            return false;
-        }
+        return (nameEntered && addressEntered && phoneNumberEntered);
     }
 }

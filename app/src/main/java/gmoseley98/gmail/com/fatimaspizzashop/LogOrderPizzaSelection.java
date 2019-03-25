@@ -33,7 +33,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_pizza_selection);
 
-        order = (Delivery)getIntent().getParcelableExtra("order_parcel_data");
+        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
 
         pizzaTypeRadGroup = (RadioGroup) findViewById(R.id.pizzaTypeRadGroup);
         supremeRadBtn = (RadioButton) findViewById(R.id.supremeRadBtn);
@@ -45,25 +45,36 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         pizzaTypeRadGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.supremeRadBtn) {
+                switch(checkedId) {
+                    case R.id.supremeRadBtn:
 
-                    order.setPizzaType("Supreme");
-                }
-                else if(checkedId == R.id.meatLoversRadBtn) {
+                        order.setPizzaType("Supreme");
 
-                    order.setPizzaType("Meat Lovers");
-                }
-                else if(checkedId == R.id.cheeseRadBtn) {
+                        break;
 
-                    order.setPizzaType("Cheese");
-                }
-                else if(checkedId == R.id.pepperoniRadBtn) {
+                    case R.id.meatLoversRadBtn:
 
-                    order.setPizzaType("Pepperoni");
-                }
-                else {
+                        order.setPizzaType("Meat Lovers");
 
-                    order.setPizzaType("Veggie");
+                        break;
+
+                    case R.id.cheeseRadBtn:
+
+                        order.setPizzaType("Cheese");
+
+                        break;
+
+                    case R.id.pepperoniRadBtn:
+
+                        order.setPizzaType("Pepperoni");
+
+                        break;
+
+                    case R.id.veggieRadBtn:
+
+                        order.setPizzaType("Veggie");
+
+                        break;
                 }
 
                 pizzaTypeSelected = true;
@@ -81,7 +92,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
 
                     order.setPizzaSize("Medium");
                 }
-                else {
+                else if(checkedId == R.id.sizeLargeRadBtn){
 
                     order.setPizzaSize("Large");
                 }

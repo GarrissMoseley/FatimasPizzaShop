@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 public class PaymentSelectPayment extends AppCompatActivity {
 
+    private Order order;
+
     private RadioGroup paymentTypeRadGroup;
     private RadioButton creditCardRadBtn, cashRadBtn;
 
@@ -29,6 +31,8 @@ public class PaymentSelectPayment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_select_payment);
+
+        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
 
         paymentTypeRadGroup = (RadioGroup) findViewById(R.id.paymentTypeRadGroup);
         creditCardRadBtn = (RadioButton) findViewById(R.id.creditCardRadBtn);
@@ -57,6 +61,8 @@ public class PaymentSelectPayment extends AppCompatActivity {
             public void onClick(View v) {
                 if(priceEntered() && intent != null) {
 
+                    intent.putExtra("order_parcel_data", order);
+
                     startActivity(intent);
                 }
                 else if(!priceEntered() && intent == null){
@@ -84,11 +90,17 @@ public class PaymentSelectPayment extends AppCompatActivity {
     public void creditCardSelected() {
 
         intent = new Intent(this, PaymentCreditCardInfo.class);
+
+//        order.setCreditCard(new CreditCard());
+        order.setPaymentType("Credit Card");
     }
 
     public void cashSelected() {
 
         intent = new Intent(this, HomeScreen.class);
+
+        order.setCreditCard(null);
+        order.setPaymentType("Cash");
     }
 
     public boolean priceEntered() {
@@ -98,15 +110,10 @@ public class PaymentSelectPayment extends AppCompatActivity {
         if(!priceEditText.getText().toString().equals("")) {
 
             priceEntered = true;
+
+            order.setPrice(Double.valueOf(priceEditText.getText().toString()));
         }
 
-        if(priceEntered) {
-
-            return true;
-        }
-        else {
-
-            return false;
-        }
+        return priceEntered;
     }
 }

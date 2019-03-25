@@ -1,9 +1,6 @@
 /********************************
  * Author: Ethan Rimer
  * Class Name: Order
- *
- * NOTE: This class and its subclasses are currently not integrated into the
- * main code. These classes are just placeholders for now.
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
@@ -18,6 +15,7 @@ public class Order implements Parcelable {
     private double price = 0;
     private String paymentType, name, pizzaType, pizzaSize;
     private ArrayList<String> toppings = new ArrayList<>();
+    private CreditCard creditCard;
 
     public Order() {
 
@@ -31,7 +29,8 @@ public class Order implements Parcelable {
         name = in.readString();
         pizzaType = in.readString();
         pizzaSize = in.readString();
-//        toppings = in.readStringList();
+
+        toppings = in.createStringArrayList();
     }
 
     @Override
@@ -43,7 +42,8 @@ public class Order implements Parcelable {
         dest.writeString(name);
         dest.writeString(pizzaType);
         dest.writeString(pizzaSize);
-//        dest.readArrayList();
+
+        dest.writeStringList(toppings);
     }
 
     public static final Parcelable.Creator<Order> CREATOR
@@ -70,7 +70,7 @@ public class Order implements Parcelable {
         this.orderID = orderID;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
 
         this.price = price;
     }
@@ -93,6 +93,21 @@ public class Order implements Parcelable {
     public void setPizzaSize(String pizzaSize) {
 
         this.pizzaSize = pizzaSize;
+    }
+
+    public void addToppings(String s) {
+
+        toppings.add(s);
+    }
+
+    public void removeToppings(String s) {
+
+        toppings.remove(s);
+    }
+
+    public void setCreditCard(CreditCard c) {
+
+        creditCard = c;
     }
 
     public int getOrderID() {
@@ -123,5 +138,15 @@ public class Order implements Parcelable {
     public String getPizzaSize() {
 
         return pizzaSize;
+    }
+
+    public ArrayList<String> getToppings() {
+
+        return toppings;
+    }
+
+    public CreditCard getCreditCard() {
+
+        return creditCard;
     }
 }

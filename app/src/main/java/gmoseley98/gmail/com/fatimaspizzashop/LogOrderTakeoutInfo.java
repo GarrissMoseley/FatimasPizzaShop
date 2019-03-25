@@ -63,13 +63,6 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
             phoneNumberEntered = true;
         }
 
-        if(nameEntered && phoneNumberEntered) {
-
-            return true;
-        }
-        else {
-
-            return false;
-        }
+        return nameEntered && phoneNumberEntered;
     }
 }

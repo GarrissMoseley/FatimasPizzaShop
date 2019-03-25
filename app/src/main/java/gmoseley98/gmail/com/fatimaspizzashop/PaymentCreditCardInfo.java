@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 public class PaymentCreditCardInfo extends AppCompatActivity {
 
+    private Order order;
+
+    private CreditCard creditCard;
+
+    private String cardNum, name, securityNum, expDate;
+
     private EditText cardNumEditText, nameEditText, securityNumEditText,
             expDateEditText;
 
@@ -23,6 +29,8 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_credit_card_info);
+
+        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
 
         cardNumEditText = (EditText) findViewById(R.id.cardNumEditText);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
@@ -42,6 +50,9 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
 
     public void finishOrder() {
         if(allFieldsFilled()) {
+
+            order.setCreditCard(creditCard
+                    = new CreditCard(cardNum, name, securityNum, expDate));
 
             Intent intent = new Intent(this, HomeScreen.class);
             startActivity(intent);
@@ -63,30 +74,31 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
         if(!cardNumEditText.getText().toString().equals("")) {
 
             cardNumFilled = true;
+
+            cardNum = cardNumEditText.getText().toString();
         }
         if(!nameEditText.getText().toString().equals("")) {
 
             nameFilled = true;
+
+            name = nameEditText.getText().toString();
         }
         if(!securityNumEditText.getText().toString().equals("")) {
 
             securityNumFilled = true;
+
+            securityNum = securityNumEditText.getText().toString();
         }
         if(!expDateEditText.getText().toString().equals("")) {
 
             expDateFilled = true;
+
+            expDate = expDateEditText.getText().toString();
         }
 
-        if(cardNumFilled
+        return (cardNumFilled
                 && nameFilled
                 && securityNumFilled
-                && expDateFilled) {
-
-            return true;
-        }
-        else {
-
-            return false;
-        }
+                && expDateFilled);
     }
 }

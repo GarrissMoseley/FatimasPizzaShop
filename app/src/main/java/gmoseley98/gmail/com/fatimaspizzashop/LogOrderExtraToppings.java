@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 
 public class LogOrderExtraToppings extends AppCompatActivity {
 
+    private Order order;
+
     private CheckBox mushroomsChkBox, onionsChkBox, grnPeppersChkBox,
             jalapenosChkBox, beefChkBox, chickenChkBox, sausageChkBox,
             pineappleChkBox, hamChkBox, spinachChkBox;
@@ -24,6 +26,8 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_extra_toppings);
 
+        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
+
         mushroomsChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         onionsChkBox = (CheckBox) findViewById(R.id.onionsChkBox);
         grnPeppersChkBox = (CheckBox) findViewById(R.id.grnPeppersChkBox);
@@ -31,9 +35,9 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         beefChkBox = (CheckBox) findViewById(R.id.beefChkBox);
         chickenChkBox = (CheckBox) findViewById(R.id.chickenChkBox);
         sausageChkBox = (CheckBox) findViewById(R.id.sausageChkBox);
-        pineappleChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
-        hamChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
-        spinachChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
+        pineappleChkBox = (CheckBox) findViewById(R.id.pineappleChkBox);
+        hamChkBox = (CheckBox) findViewById(R.id.hamChkBox);
+        spinachChkBox = (CheckBox) findViewById(R.id.spinachChkBox);
 
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
@@ -46,7 +50,7 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         }));
     }
 
-    public void onCheckClicked(View view) {
+    public void onCheckboxClicked(View view) {
 
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -54,13 +58,129 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.mushroomsChkBox:
                 if(checked) {
 
+                    order.addToppings("Mushrooms");
                 }
+                else {
+
+                    order.removeToppings("Mushrooms");
+                }
+
+                break;
+
+            case R.id.onionsChkBox:
+                if(checked) {
+
+                    order.addToppings("Onions");
+                }
+                else {
+
+                    order.removeToppings("Onions");
+                }
+
+                break;
+
+            case R.id.grnPeppersChkBox:
+                if(checked) {
+
+                    order.addToppings("Green Peppers");
+                }
+                else {
+
+                    order.removeToppings("Green Peppers");
+                }
+
+                break;
+
+            case R.id.jalapenosChkBox:
+                if(checked) {
+
+                    order.addToppings("Jalapeños");
+                }
+                else {
+
+                    order.removeToppings("Jalapeños");
+                }
+
+                break;
+
+            case R.id.beefChkBox:
+                if(checked) {
+
+                    order.addToppings("Beef");
+                }
+                else {
+
+                    order.removeToppings("Beef");
+                }
+
+                break;
+
+            case R.id.chickenChkBox:
+                if(checked) {
+
+                    order.addToppings("Chicken");
+                }
+                else {
+
+                    order.removeToppings("Chicken");
+                }
+
+                break;
+
+            case R.id.sausageChkBox:
+                if(checked) {
+
+                    order.addToppings("Sausage");
+                }
+                else {
+
+                    order.removeToppings("Sausage");
+                }
+
+                break;
+
+            case R.id.pineappleChkBox:
+                if(checked) {
+
+                    order.addToppings("Pineapple");
+                }
+                else {
+
+                    order.removeToppings("Pineapple");
+                }
+
+                break;
+
+            case R.id.hamChkBox:
+                if(checked) {
+
+                    order.addToppings("Ham");
+                }
+                else {
+
+                    order.removeToppings("Ham");
+                }
+
+                break;
+
+            case R.id.spinachChkBox:
+                if(checked) {
+
+                    order.addToppings("Spinach");
+                }
+                else {
+
+                    order.removeToppings("Spinach");
+                }
+
+                break;
         }
     }
 
     public void openPaymentSelection() {
 
         Intent intent = new Intent(this, PaymentSelectPayment.class);
+        intent.putExtra("order_parcel_data", order);
         startActivity(intent);
     }
 }
