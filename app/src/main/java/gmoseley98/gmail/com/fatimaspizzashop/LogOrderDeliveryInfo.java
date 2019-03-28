@@ -44,7 +44,7 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
 
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            intent.putExtra("delivery_parcel_data", order);
+            intent.putExtra("order_parcel_data", order);
             startActivity(intent);
         }
         else {
