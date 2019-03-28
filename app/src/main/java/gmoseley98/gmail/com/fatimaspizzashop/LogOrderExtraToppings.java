@@ -26,7 +26,7 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_extra_toppings);
 
-        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
+        order = getIntent().getParcelableExtra("order_parcel_data");
 
         mushroomsChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         onionsChkBox = (CheckBox) findViewById(R.id.onionsChkBox);

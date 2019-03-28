@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 public class LogOrderInHouseInfo extends AppCompatActivity {
 
+    private InHouse order = new InHouse();
+
     private EditText nameEditText;
     private Button nextBtn;
 
@@ -30,6 +32,7 @@ public class LogOrderInHouseInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                openPizzaSelection();
             }
         });
     }
@@ -38,6 +41,8 @@ public class LogOrderInHouseInfo extends AppCompatActivity {
         if(nameEntered()) {
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+            intent.putExtra("inhouse_parcel_data", order);
+
             startActivity(intent);
         }
         else {
@@ -54,6 +59,8 @@ public class LogOrderInHouseInfo extends AppCompatActivity {
         if(!nameEditText.getText().toString().equals("")) {
 
             nameEntered = true;
+
+            order.setName(nameEditText.getText().toString());
         }
 
         return nameEntered;

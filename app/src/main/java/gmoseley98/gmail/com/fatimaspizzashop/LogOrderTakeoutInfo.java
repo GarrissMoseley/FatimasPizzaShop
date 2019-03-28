@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 public class LogOrderTakeoutInfo extends AppCompatActivity {
 
+    private TakeOut order = new TakeOut();
+
     private EditText nameEditText, phoneNumberEditText;
     private Button nextBtn;
 
@@ -40,6 +42,7 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         if(allFieldsFilled()) {
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+            intent.putExtra("takeout_parcel_data", order);
             startActivity(intent);
         }
         else {
@@ -57,10 +60,14 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         if(!nameEditText.getText().toString().equals("")) {
 
             nameEntered = true;
+
+            order.setName(nameEditText.getText().toString());
         }
         if(!phoneNumberEditText.getText().toString().equals("")) {
 
             phoneNumberEntered = true;
+
+            order.setPhoneNumber(phoneNumberEditText.getText().toString());
         }
 
         return nameEntered && phoneNumberEntered;
