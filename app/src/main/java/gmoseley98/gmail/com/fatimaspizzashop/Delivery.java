@@ -9,8 +9,7 @@ import android.os.Parcelable;
 
 public class Delivery extends Order {
 
-    private String address = "";
-    private String phoneNumber = "";
+    private String address, phoneNumber;
 
     public Delivery() {
 
@@ -42,7 +41,7 @@ public class Delivery extends Order {
         }
     };
 
-    public void setAddress(String Address) {
+    public void setAddress(String address) {
 
         this.address = address;
     }
