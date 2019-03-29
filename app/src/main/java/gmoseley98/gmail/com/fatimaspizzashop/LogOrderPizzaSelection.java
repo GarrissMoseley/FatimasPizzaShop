@@ -33,7 +33,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_pizza_selection);
 
-        setOrderType();
+        order = getIntent().getParcelableExtra("order_parcel_data");
 
         pizzaTypeRadGroup = (RadioGroup) findViewById(R.id.pizzaTypeRadGroup);
         supremeRadBtn = (RadioButton) findViewById(R.id.supremeRadBtn);
@@ -106,19 +106,21 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!pizzaTypeSelected && !pizzaSizeSelected){
+                if(!pizzaTypeSelected) {
+                    if(!pizzaSizeSelected) {
 
-                    Toast.makeText(getApplicationContext(),
-                            "Please select pizza type and size",
-                            Toast.LENGTH_LONG).show();
-                }
-                else if(!pizzaTypeSelected && pizzaSizeSelected) {
+                        Toast.makeText(getApplicationContext(),
+                                "Please select pizza type and size",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    else {
 
-                    Toast.makeText(getApplicationContext(),
-                            "Please select pizza type",
-                            Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Please select pizza type",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-                else if(pizzaTypeSelected && !pizzaSizeSelected) {
+                else if(!pizzaSizeSelected) {
 
                     Toast.makeText(getApplicationContext(),
                             "Please select pizza size",
@@ -132,61 +134,10 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         }));
     }
 
-    public void setOrderType() {
-        if(isDeliveryOrder()) {
-
-            order = (Delivery) getIntent().getParcelableExtra(
-                    "delivery_parcel_data");
-        }
-        else if(isInHouseOrder()) {
-
-            order = (InHouse) getIntent().getParcelableExtra(
-                    "inhouse_parcel_data");
-        }
-        else {
-
-            order = (InHouse) getIntent().getParcelableExtra(
-                    "inhouse_parcel_data");
-        }
-    }
-
     public void openExtraToppings() {
 
         Intent intent = new Intent(this, LogOrderExtraToppings.class);
         intent.putExtra("order_parcel_data", order);
         startActivity(intent);
-    }
-
-    public boolean isDeliveryOrder() {
-        if(getIntent().getParcelableExtra("delivery_parcel_data") == null) {
-
-            return false;
-        }
-        else {
-
-            return true;
-        }
-    }
-
-    public boolean isInHouseOrder() {
-        if(getIntent().getParcelableExtra("inhouse_parcel_data") == null) {
-
-            return false;
-        }
-        else {
-
-            return true;
-        }
-    }
-
-    public boolean isTakeoutOrder() {
-        if(getIntent().getParcelableExtra("takeout_parcel_data") == null) {
-
-            return false;
-        }
-        else {
-
-            return true;
-        }
     }
 }

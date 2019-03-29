@@ -34,6 +34,7 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openPizzaSelection();
             }
         });
@@ -44,7 +45,7 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
 
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            intent.putExtra("delivery_parcel_data", order);
+            intent.putExtra("order_parcel_data", order);
 
             startActivity(intent);
         }

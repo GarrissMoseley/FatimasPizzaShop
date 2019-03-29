@@ -41,7 +41,7 @@ public class LogOrderInHouseInfo extends AppCompatActivity {
         if(nameEntered()) {
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            intent.putExtra("inhouse_parcel_data", order);
+            intent.putExtra("order_parcel_data", order);
 
             startActivity(intent);
         }

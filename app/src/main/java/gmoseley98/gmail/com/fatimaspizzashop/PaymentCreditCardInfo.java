@@ -30,7 +30,7 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_credit_card_info);
 
-        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
+        order = getIntent().getParcelableExtra("order_parcel_data");
 
         cardNumEditText = (EditText) findViewById(R.id.cardNumEditText);
         nameEditText = (EditText) findViewById(R.id.nameEditText);

@@ -32,7 +32,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_select_payment);
 
-        order = (Delivery) getIntent().getParcelableExtra("order_parcel_data");
+        order = getIntent().getParcelableExtra("order_parcel_data");
 
         paymentTypeRadGroup = (RadioGroup) findViewById(R.id.paymentTypeRadGroup);
         creditCardRadBtn = (RadioButton) findViewById(R.id.creditCardRadBtn);
@@ -59,30 +59,56 @@ public class PaymentSelectPayment extends AppCompatActivity {
         nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(priceEntered() && intent != null) {
+                if(!priceEntered()) {
+                    if(intent == null) {
 
-                    intent.putExtra("order_parcel_data", order);
+                        Toast.makeText(getApplicationContext(),
+                                "Please select payment type and enter order price",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    else {
 
-                    startActivity(intent);
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter order price",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-                else if(!priceEntered() && intent == null){
-
-                    Toast.makeText(getApplicationContext(),
-                            "Please select payment type and enter order price",
-                            Toast.LENGTH_LONG).show();
-                }
-                else if(!priceEntered() && intent != null) {
-
-                    Toast.makeText(getApplicationContext(),
-                            "Please enter order price",
-                            Toast.LENGTH_LONG).show();
-                }
-                else if(priceEntered() && intent == null) {
+                else if(intent == null) {
 
                     Toast.makeText(getApplicationContext(),
                             "Please select payment type",
                             Toast.LENGTH_LONG).show();
                 }
+                else {
+
+                    intent.putExtra("order_parcel_data", order);
+
+                    startActivity(intent);
+                }
+//                if(priceEntered() && intent != null) {
+//
+//                    intent.putExtra("order_parcel_data", order);
+//
+//                    startActivity(intent);
+//                }
+//                else if(!priceEntered() && intent == null){
+//
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please select payment type and enter order price",
+//                            Toast.LENGTH_LONG).show();
+//                }
+//                else if(!priceEntered() && intent != null) {
+//
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please enter order price",
+//                            Toast.LENGTH_LONG).show();
+//                }
+//                else if(priceEntered() && intent == null) {
+//
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please select payment type",
+//                            Toast.LENGTH_LONG).show();
+//                }
             }
         }));
     }

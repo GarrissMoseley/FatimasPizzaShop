@@ -42,7 +42,8 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         if(allFieldsFilled()) {
 
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
-            intent.putExtra("takeout_parcel_data", order);
+            intent.putExtra("order_parcel_data", order);
+
             startActivity(intent);
         }
         else {
