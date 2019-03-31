@@ -1,6 +1,9 @@
 /********************************
  * Author: Ethan Rimer
  * Class Name: InHouse
+ * Class Description: Object class for InHouse subclass.
+ * In hindsight, this class is probably unnecessary since
+ * it has no unique attributes or methods.
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
@@ -9,21 +12,28 @@ import android.os.Parcelable;
 
 public class InHouse extends Order {
 
+    /* No unique attributes :( */
+
+    //  Default constructor
     public InHouse() {
 
     }
 
+    //  Parameterized constructor which takes a Parcel as input
     public InHouse(Parcel in) {
 
         super(in);
     }
 
+    //  writeToParcel(Parcel, int) method
+    //  Writes object info to a Parcel, I guess
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
         super.writeToParcel(dest, flags);
     }
 
+    //  Mystey Object: Reloaded
     public static final Parcelable.Creator<InHouse> CREATOR
             = new Parcelable.Creator<InHouse>() {
         public InHouse createFromParcel(Parcel in) {

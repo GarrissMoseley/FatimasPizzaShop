@@ -1,6 +1,7 @@
 /********************************
  * Author: Ethan Rimer
  * Class Name: LogOrderExtraToppings
+ * Class Description: Allows the user to select extra toppings
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
@@ -13,12 +14,17 @@ import android.widget.CheckBox;
 
 public class LogOrderExtraToppings extends AppCompatActivity {
 
+    //  Creates an uninitialized Order object
     private Order order;
 
+    //  Creates uninitialized CheckBox objects for all ten toppings
+    //  CheckBoxes can have more than one selection at a time,
+    //  unlike RadioButtons in a RadioGroup
     private CheckBox mushroomsChkBox, onionsChkBox, grnPeppersChkBox,
             jalapenosChkBox, beefChkBox, chickenChkBox, sausageChkBox,
             pineappleChkBox, hamChkBox, spinachChkBox;
 
+    //  Creates an uninitialized Button object
     private Button nextBtn;
 
     @Override
@@ -26,8 +32,11 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_extra_toppings);
 
+        //  Receives info from the previous activity from the Parcel
+        //  and stores it in 'order'
         order = getIntent().getParcelableExtra("order_parcel_data");
 
+        //  Sets the CheckBoxes equal to the corresponding XML object
         mushroomsChkBox = (CheckBox) findViewById(R.id.mushroomsChkBox);
         onionsChkBox = (CheckBox) findViewById(R.id.onionsChkBox);
         grnPeppersChkBox = (CheckBox) findViewById(R.id.grnPeppersChkBox);
@@ -39,8 +48,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         hamChkBox = (CheckBox) findViewById(R.id.hamChkBox);
         spinachChkBox = (CheckBox) findViewById(R.id.spinachChkBox);
 
+        //  Sets the Button object equal to the corresponding XML object
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
+        //  On click listener for nextBtn
+        //  Launches the payment selection activity
+        //  There is no need to make sure something is selected because extra
+        //  toppings are optional (hence 'extra').
         nextBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +64,9 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         }));
     }
 
+    //  onCheckboxClicked(View) method
+    //  Checks if any CheckBoxes are checked
+    //  and adds or removes extra toppings accordingly
     public void onCheckboxClicked(View view) {
 
         boolean checked = ((CheckBox) view).isChecked();
@@ -177,10 +194,15 @@ public class LogOrderExtraToppings extends AppCompatActivity {
         }
     }
 
+    //  openPaymentSelection() method
+    //  Launches the payment selection screen
     public void openPaymentSelection() {
 
         Intent intent = new Intent(this, PaymentSelectPayment.class);
+
+        //  Puts all order data in a Parcel to be sent to the next screen
         intent.putExtra("order_parcel_data", order);
+
         startActivity(intent);
     }
 }
