@@ -146,7 +146,7 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
                     //  "AND pizza size is not selected. . ."
                     if(!pizzaSizeSelected) {
 
-                        //  User prompt) "Please select pizza type and size"
+                        //  (User prompt) "Please select pizza type and size"
                         Toast.makeText(getApplicationContext(),
                                 "Please select pizza type and size",
                                 Toast.LENGTH_LONG).show();
