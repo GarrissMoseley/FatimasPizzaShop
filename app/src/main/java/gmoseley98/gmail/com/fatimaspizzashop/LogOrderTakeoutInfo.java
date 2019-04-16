@@ -1,8 +1,8 @@
 /********************************
  * Author: Ethan Rimer
- * Class Name: LogOrderDeliveryInfo
+ * Class Name: LogOrderTakeoutInfo
  * Class Description: Allows the user to enter customer
- * information for delivery orders, i.e name, address, and phone number.
+ * information for takeout orders, i.e name and phone number.
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
@@ -14,15 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LogOrderDeliveryInfo extends AppCompatActivity {
+public class LogOrderTakeoutInfo extends AppCompatActivity {
 
-    //  Creates a new Delivery object
-    //  and initializes it to an empty Delivery object
-    private Delivery order = new Delivery();
+    //  Creates a new TakeOut object
+    //  and initializes it to an empty TakeOut object
+    private TakeOut order = new TakeOut();
 
-    //  Creates three uninitialized EditText objects
-    //  for name, address, and phone number
-    private EditText nameEditText, addressEditText, phoneNumberEditText;
+    //  Creates two new uninitialized EditText objects
+    //  for customer name and phone number
+    private EditText nameEditText, phoneNumberEditText;
 
     //  Creates an uninitialized Button object
     private Button nextBtn;
@@ -30,15 +30,14 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_order_delivery_info);
+        setContentView(R.layout.activity_log_order_takeout_info);
 
-        //  Sets the three EditText objects equal
-        //  to the corresponding XML objects
-        nameEditText  = (EditText) findViewById(R.id.nameEditText);
-        addressEditText = (EditText) findViewById(R.id.addressEditText);
+        //  Sets the two EditText objects equal
+        //  to the corresponging XML objects
+        nameEditText = (EditText) findViewById(R.id.nameEditText);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
 
-        //  Sets nextBtn equal to the corresponding XML object
+        //  Sets the Button object equal to the corresponding XML object
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
         //  On click listener for nextBtn
@@ -53,14 +52,14 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
     }
 
     //  openPizzaSelection() method
-    //  First checks that all fields are filled and then opens pizza selection
+    //  First checks that all fields are filled
+    //  and then opens the pizza selection activity
     public void openPizzaSelection() {
         if(allFieldsFilled()) {
 
-
             Intent intent = new Intent(this, LogOrderPizzaSelection.class);
 
-            //  Adds Delivery object info to the intent via a Parcel
+            //  Adds Takeout object info to the intent via a Parcel
             intent.putExtra("order_parcel_data", order);
 
             startActivity(intent);
@@ -72,18 +71,12 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
         }
     }
 
-    //  allFieldsFilled() method
-    //  Checks that all text fields are not empty
-    //  Returns false if all fields do not have something in them
-    //  (Side note: I'm pretty happy with this method and others like it
-    //  because the first method I tried crashed the app
-    //  and this is the first one that worked. :)
-    //  One of these in in-house info, takeout info,
-    //  payment selection, and credit card info)
+    //  allFieldsFilled()
+    //  Checks that both text fields are not null
+    //  Returns false if both fields are not filled
     public boolean allFieldsFilled() {
 
         boolean nameEntered = false;
-        boolean addressEntered = false;
         boolean phoneNumberEntered = false;
 
         if(!nameEditText.getText().toString().equals("")) {
@@ -92,12 +85,6 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
 
             order.setName(nameEditText.getText().toString());
         }
-        if(!addressEditText.getText().toString().equals("")) {
-
-            addressEntered = true;
-
-            order.setAddress(addressEditText.getText().toString());
-        }
         if(!phoneNumberEditText.getText().toString().equals("")) {
 
             phoneNumberEntered = true;
@@ -105,6 +92,6 @@ public class LogOrderDeliveryInfo extends AppCompatActivity {
             order.setPhoneNumber(phoneNumberEditText.getText().toString());
         }
 
-        return (nameEntered && addressEntered && phoneNumberEntered);
+        return nameEntered && phoneNumberEntered;
     }
 }

@@ -1,6 +1,9 @@
 /********************************
  * Author: Ethan Rimer
  * Class Name: LogOrderMain
+ * Class Description: This is the main activity for logging an order.
+ * Here, the user chooses whether to log a delivery, in-house,
+ * or takeout order.
  ********************************/
 package gmoseley98.gmail.com.fatimaspizzashop;
 
@@ -12,50 +15,75 @@ import android.widget.Button;
 
 public class LogOrderMain extends AppCompatActivity {
 
-    private Button delivery;
-    private Button inHouse;
-    private Button takeOut;
+    //  Creates three uninitialized Button objects
+    private Button deliveryBtn, inHouseBtn, takeOutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_order_main);
 
-        delivery = (Button) findViewById(R.id.deliveryBtn);
-        inHouse = (Button) findViewById(R.id.inHouseBtn);
-        takeOut = (Button) findViewById(R.id.takeOutBtn);
+        //  Sets the three Button objects equal
+        //  to the corresponding XML objects
+        deliveryBtn = (Button) findViewById(R.id.deliveryBtn);
+        inHouseBtn = (Button) findViewById(R.id.inHouseBtn);
+        takeOutBtn = (Button) findViewById(R.id.takeOutBtn);
 
-        delivery.setOnClickListener(new View.OnClickListener() {
+        //  On click listener for deliveryBtn
+        //  When clicked, the delivery button will open the
+        //  delivery info activity
+        deliveryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openDeliveryInfo();
             }
         });
 
-        inHouse.setOnClickListener(new View.OnClickListener() {
+        //  On click listener for inHouseBtn
+        //  When clicked, the in-house button will open the
+        //  in-house info activity
+        inHouseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPizzaSelection();
+
+                openInHouseInfo();
             }
         });
 
-        takeOut.setOnClickListener(new View.OnClickListener() {
+        //  On click listener for takeOutBtn
+        //  When clicked, the takeout button will open the
+        //  takeout info activity
+        takeOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPizzaSelection();
+
+                openTakeoutInfo();
             }
         });
     }
 
+    //  openDeliveryInfo() method
+    //  Opens delivery info page
     public void openDeliveryInfo() {
 
         Intent intent = new Intent(this, LogOrderDeliveryInfo.class);
         startActivity(intent);
     }
 
-    public void openPizzaSelection() {
+    //  openInHouseInfo() method
+    //  Opens in-house info page
+    public void openInHouseInfo() {
 
-        Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+        Intent intent = new Intent(this, LogOrderInHouseInfo.class);
+        startActivity(intent);
+    }
+
+    //  openTakeoutInfo() method
+    //  Opens takeout info page
+    public void openTakeoutInfo() {
+
+        Intent intent = new Intent(this, LogOrderTakeoutInfo.class);
         startActivity(intent);
     }
 }
