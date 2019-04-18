@@ -17,6 +17,7 @@ public class Delivery extends Order {
     //  Default constructor
     public Delivery() {
 
+        super.setOrderType("Delivery");
     }
 
     //  Parameterized constructor which takes a Parcel as input

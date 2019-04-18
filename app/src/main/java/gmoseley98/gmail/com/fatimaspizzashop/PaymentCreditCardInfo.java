@@ -73,6 +73,8 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
 
             Intent intent = new Intent(this, HomeScreen.class);
 
+            /*  Insert database implementation here  */
+
             Toast.makeText(getApplicationContext(),
                     "Order successfully logged",
                     Toast.LENGTH_LONG).show();

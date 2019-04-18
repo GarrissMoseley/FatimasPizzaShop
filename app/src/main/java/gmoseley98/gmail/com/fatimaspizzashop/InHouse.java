@@ -12,11 +12,16 @@ import android.os.Parcelable;
 
 public class InHouse extends Order {
 
-    /* No unique attributes :( */
+    /***********
+    * And this is where I'd put my InHouse object attributes...
+    *
+    * IF I HAD ANY!!
+    ***********/
 
     //  Default constructor
     public InHouse() {
 
+        super.setOrderType("In-House");
     }
 
     //  Parameterized constructor which takes a Parcel as input

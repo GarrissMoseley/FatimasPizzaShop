@@ -17,6 +17,7 @@ public class TakeOut extends Order {
     //  Default constructor
     public TakeOut() {
 
+        super.setOrderType("Takeout");
     }
 
     //  Parameterized constructor which takes a Parcel as input

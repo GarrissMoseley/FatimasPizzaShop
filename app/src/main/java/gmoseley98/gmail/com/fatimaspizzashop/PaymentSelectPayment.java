@@ -21,19 +21,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
     //  Creates an uninitialized Order object
     private Order order;
 
-    //  Creates an uninitialized RadioGroup and RadioButtons for payment type
-    //  This means that only one payment type can be selected at a time
-    private RadioGroup paymentTypeRadGroup;
-    private RadioButton creditCardRadBtn, cashRadBtn;
-
-    //  Creates an uninitialized EditText
-    private EditText priceEditText;
-
-    //  Creates an uninitialized Button object
-    private Button nextBtn;
-
-    //  Creates an Intent object and initializes it to 'null'
-    private Intent intent = null;
+    private Button creditCardBtn, cashBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,135 +32,47 @@ public class PaymentSelectPayment extends AppCompatActivity {
         //  and stores it in 'order'
         order = getIntent().getParcelableExtra("order_parcel_data");
 
-        //  Sets the RadioGroup and RadioButtons equal
-        //  to the corresponding XML object
-        paymentTypeRadGroup = (RadioGroup) findViewById(R.id.paymentTypeRadGroup);
-        creditCardRadBtn = (RadioButton) findViewById(R.id.creditCardRadBtn);
-        cashRadBtn = (RadioButton) findViewById(R.id.cashRadBtn);
+        creditCardBtn = (Button) findViewById(R.id.creditCardBtn);
+        cashBtn = (Button) findViewById(R.id.cashBtn);
 
-        //  Sets the EditText equal to the corresponding XML object
-        priceEditText = (EditText) findViewById(R.id.priceEditText);
-
-        //  Sets the Button object equal to the corresponding XML object
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-
-        //  On checked change listener for payment type
-        //  Allows the user to choose payment type, i.e cash or credit card
-        paymentTypeRadGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.creditCardRadBtn) {
-
-                    creditCardSelected();
-                }
-                else if(checkedId == R.id.cashRadBtn) {
-
-                    cashSelected();
-                }
-            }
-        });
-
-        //  On click listener for nextBtn
-        //  Checks that payment type is selected and price is entered before
-        //  opening the next screen.
-        //  If credit card is chosen, the credit card info screen is opened.
-        //  If cash is chosen, the home screen is opened.
-        nextBtn.setOnClickListener((new View.OnClickListener() {
+        creditCardBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //  "IF price is not entered. . ."
-                if(!priceEntered()) {
+                order.setPaymentType("Credit Card");
+                openCreditCardInfo();
+            }
+        }));
 
-                    //  "AND payment type is not selected. . ."
-                    if(intent == null) {
+        cashBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                        //  (User prompt) "Please select payment type
-                        //                  and enter order price"
-                        Toast.makeText(getApplicationContext(),
-                                "Please select payment type and enter order price",
-                                Toast.LENGTH_LONG).show();
-                    }
-
-                    //  "OTHERWISE. . ."
-                    else {
-
-                        //  (User prompt) "Please enter order price"
-                        Toast.makeText(getApplicationContext(),
-                                "Please enter order price",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                //  "OTHERWISE, IF payment type is not selected. . ."
-                else if(intent == null) {
-
-                    //  (User prompt) "Please select payment type"
-                    Toast.makeText(getApplicationContext(),
-                            "Please select payment type",
-                            Toast.LENGTH_LONG).show();
-                }
-
-                //  "OTHERWISE. . ."
-                else {
-
-                    //  Puts the order data in a Parcel
-                    intent.putExtra("order_parcel_data", order);
-
-                    //  Prints success dialog if payment type is cash
-                    if(order.getPaymentType().equals("Cash")) {
-
-                        Toast.makeText(getApplicationContext(),
-                                "Order successfully logged",
-                                Toast.LENGTH_LONG).show();
-                    }
-
-                    //  Opens the next activity
-                    //  depending on what payment type was chosen
-                    startActivity(intent);
-                }
+                order.setPaymentType("Cash");
+                completeOrder();
             }
         }));
     }
 
-    //  creditCardSelected() method
-    //  Sets the Intent to point to the credit card info screen
-    //  if payment type is credit card
-    //  and sets order payment type as credit card
-    public void creditCardSelected() {
+    public void openCreditCardInfo() {
 
-        intent = new Intent(this, PaymentCreditCardInfo.class);
+        Intent intent = new Intent(this, PaymentCreditCardInfo.class);
 
-        order.setPaymentType("Credit Card");
+        intent.putExtra("order_parcel_data", order);
+
+        startActivity(intent);
     }
 
-    //  cashSelected() method
-    //  Sets the Intent to point to the home screen
-    //  if payment type is cash
-    //  and sets order payment type as cash
-    public void cashSelected() {
+    public void completeOrder() {
 
-        intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent(this, LogOrderMain.class);
 
-        order.setCreditCard(null);
-        order.setPaymentType("Cash");
-    }
+        /*  Insert database implementation here  */
 
-    //  priceEntered() method
-    //  Checks that the price field isn't empty
-    //  (Side note: Again, I don't know if it's necessarily efficient to have
-    //  a method like this for just one boolean, but consistency or whatever.)
-    public boolean priceEntered() {
+        Toast.makeText(getApplicationContext(),
+                "Order successfully logged",
+                Toast.LENGTH_LONG).show();
 
-        boolean priceEntered = false;
-
-        if(!priceEditText.getText().toString().equals("")) {
-
-            priceEntered = true;
-
-            order.setPrice(Double.valueOf(priceEditText.getText().toString()));
-        }
-
-        return priceEntered;
+        startActivity(intent);
     }
 }

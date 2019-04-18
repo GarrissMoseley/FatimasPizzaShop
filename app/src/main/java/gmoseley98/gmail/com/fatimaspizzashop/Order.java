@@ -13,14 +13,13 @@ import java.util.ArrayList;
 public class Order implements Parcelable {
 
     //  Attributes for Order:
-    //  price, orderID, payment type, customer name, pizza type, pizza size,
-    //  toppings, and credit card.
+    //  totalPrice, orderID, payment type, customer name, pizzas, and credit card.
     //  (Side note: It took a good bit to figure out how have ArrayList
     //  compatible with Parcelable. I knew I had to have some sort of String
     //  array for toppings and ArrayList seemed like the best choice.)
-    private double price = 0;
-    private String orderID, paymentType, name, pizzaType, pizzaSize;
-    private ArrayList<String> toppings = new ArrayList<>();
+    private double totalPrice = 0;
+    private String orderID, paymentType, orderType, name;
+    private  ArrayList<Pizza> pizzas = new ArrayList<>();
     private CreditCard creditCard;
 
     //  Default constructor
@@ -33,13 +32,12 @@ public class Order implements Parcelable {
     //  are in the same order as they are declared.
     public Order(Parcel in) {
 
-        price = in.readDouble();
+        totalPrice = in.readDouble();
         orderID = in.readString();
         paymentType = in.readString();
+        orderType = in.readString();
         name = in.readString();
-        pizzaType = in.readString();
-        pizzaSize = in.readString();
-        toppings = in.createStringArrayList();
+        creditCard = (CreditCard) in.readValue(CreditCard.class.getClassLoader());
     }
 
     //  writeToParcel(Parcel, int) method
@@ -47,13 +45,13 @@ public class Order implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeDouble(price);
+        dest.writeDouble(totalPrice);
         dest.writeString(orderID);
         dest.writeString(paymentType);
+        dest.writeString(orderType);
         dest.writeString(name);
-        dest.writeString(pizzaType);
-        dest.writeString(pizzaSize);
-        dest.writeStringList(toppings);
+        dest.writeTypedList(pizzas);
+        dest.writeValue(creditCard);
     }
 
     //  I'll be perfectly honest.
@@ -80,105 +78,90 @@ public class Order implements Parcelable {
         return 0;
     }
 
-    //  Order ID setter
-    public void setOrderID(String orderID) {
+    public double getTotalPrice() {
 
-        this.orderID = orderID;
+        return totalPrice;
     }
 
-    //  Price setter
-    public void setPrice(double price) {
-
-        this.price = price;
-    }
-
-    //  Payment type setter
-    public void setPaymentType(String paymentType) {
-
-        this.paymentType = paymentType;
-    }
-
-    //  Name setter
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    //  Pizza type setter
-    public void setPizzaType(String pizzaType) {
-
-        this.pizzaType = pizzaType;
-    }
-
-    //  Pizza size setter
-    public void setPizzaSize(String pizzaSize) {
-
-        this.pizzaSize = pizzaSize;
-    }
-
-    //  Method to add toppings
-    public void addToppings(String s) {
-
-        toppings.add(s);
-    }
-
-    //  Method to remove toppings
-    public void removeToppings(String s) {
-
-        toppings.remove(s);
-    }
-
-    //  Credit card setter
-    public void setCreditCard(CreditCard c) {
-
-        creditCard = c;
-    }
-
-    //  Order ID getter
     public String getOrderID() {
 
         return orderID;
     }
 
-    //  Price getter
-    public double getPrice() {
-
-        return price;
-    }
-
-    //  Payment type getter
     public String getPaymentType() {
 
         return paymentType;
     }
 
-    //  Name getter
+    public String getOrderType() {
+
+        return orderType;
+    }
+
     public String getName() {
 
         return name;
     }
 
-    //  Pizza type getter
-    public String getPizzaType() {
+    public ArrayList<Pizza> getPizzas() {
 
-        return pizzaType;
+        return pizzas;
     }
 
-    //  Pizza size getter
-    public String getPizzaSize() {
-
-        return pizzaSize;
-    }
-
-    //  Toppings getter
-    public ArrayList<String> getToppings() {
-
-        return toppings;
-    }
-
-    //  Credit card getter
     public CreditCard getCreditCard() {
 
         return creditCard;
+    }
+
+    public Pizza getCurrentPizza() {
+
+        return pizzas.get(pizzas.size() - 1);
+    }
+
+    public void setTotalPrice(double d) {
+
+        totalPrice = d;
+    }
+
+    public void incrementTotalPrice(double d) {
+
+        totalPrice += d;
+    }
+
+    public void calculateTotalPrice() {
+        for(int i = 0; i < pizzas.size(); i++) {
+
+            totalPrice += pizzas.get(i).getCost();
+        }
+    }
+
+    public void setOrderID(String s) {
+
+        orderID = s;
+    }
+
+    public void setPaymentType(String s) {
+
+        paymentType = s;
+    }
+
+    public void setOrderType(String s) {
+
+        orderType = s;
+    }
+
+    public void setName(String s) {
+
+        name = s;
+    }
+
+    public void addPizza() {
+
+        pizzas.add(new Pizza());
+    }
+
+    public void setCreditCard(CreditCard c) {
+
+        creditCard = c;
     }
 }

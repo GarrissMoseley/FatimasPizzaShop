@@ -68,31 +68,31 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
                 switch(checkedId) {
                     case R.id.supremeRadBtn:
 
-                        order.setPizzaType("Supreme");
+                        order.getCurrentPizza().setType("Supreme");
 
                         break;
 
                     case R.id.meatLoversRadBtn:
 
-                        order.setPizzaType("Meat Lovers");
+                        order.getCurrentPizza().setType("Meat Lovers");
 
                         break;
 
                     case R.id.cheeseRadBtn:
 
-                        order.setPizzaType("Cheese");
+                        order.getCurrentPizza().setType("Cheese");
 
                         break;
 
                     case R.id.pepperoniRadBtn:
 
-                        order.setPizzaType("Pepperoni");
+                        order.getCurrentPizza().setType("Pepperoni");
 
                         break;
 
                     case R.id.veggieRadBtn:
 
-                        order.setPizzaType("Veggie");
+                        order.getCurrentPizza().setType("Veggie");
 
                         break;
                 }
@@ -115,11 +115,13 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.sizeMediumRadBtn) {
 
-                    order.setPizzaSize("Medium");
+                    order.getCurrentPizza().setSize("Medium");
+                    order.getCurrentPizza().setCost(8);
                 }
                 else if(checkedId == R.id.sizeLargeRadBtn){
 
-                    order.setPizzaSize("Large");
+                    order.getCurrentPizza().setSize("Large");
+                    order.getCurrentPizza().setCost(10);
                 }
 
                 pizzaSizeSelected = true;

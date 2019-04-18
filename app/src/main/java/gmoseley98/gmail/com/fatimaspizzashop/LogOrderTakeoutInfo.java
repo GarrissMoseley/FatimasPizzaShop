@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
     //  Creates two new uninitialized EditText objects
     //  for customer name and phone number
     private EditText nameEditText, phoneNumberEditText;
+
+    private CheckBox wasLateCheckBox;
 
     //  Creates an uninitialized Button object
     private Button nextBtn;
@@ -37,6 +40,8 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
 
+        wasLateCheckBox = (CheckBox) findViewById(R.id.wasLateCheckBox);
+
         //  Sets the Button object equal to the corresponding XML object
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
@@ -49,6 +54,24 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
                 openPizzaSelection();
             }
         });
+    }
+
+    public void onCheckboxClicked(View view) {
+
+        boolean checked = ((CheckBox) view).isChecked();
+
+        if(checked) {
+            if(order.getTotalPrice() == 0) {
+
+                order.setTotalPrice(order.getTotalPrice() + 2);
+            }
+        }
+        else {
+            if(order.getTotalPrice() != 0) {
+
+                order.setTotalPrice(order.getTotalPrice() - 2);
+            }
+        }
     }
 
     //  openPizzaSelection() method

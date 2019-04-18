@@ -59,7 +59,7 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openPaymentSelection();
+                openReviewOrder();
             }
         }));
     }
@@ -75,11 +75,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.mushroomsChkBox:
                 if(checked) {
 
-                    order.addToppings("Mushrooms");
+                    order.getCurrentPizza().addTopping("Mushrooms");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Mushrooms");
+                    order.getCurrentPizza().removeTopping("Mushrooms");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -87,11 +89,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.onionsChkBox:
                 if(checked) {
 
-                    order.addToppings("Onions");
+                    order.getCurrentPizza().addTopping("Onions");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Onions");
+                    order.getCurrentPizza().removeTopping("Onions");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -99,11 +103,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.grnPeppersChkBox:
                 if(checked) {
 
-                    order.addToppings("Green Peppers");
+                    order.getCurrentPizza().addTopping("Green Peppers");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Green Peppers");
+                    order.getCurrentPizza().removeTopping("Green Peppers");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -111,11 +117,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.jalapenosChkBox:
                 if(checked) {
 
-                    order.addToppings("Jalapeños");
+                    order.getCurrentPizza().addTopping("Jalapeños");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Jalapeños");
+                    order.getCurrentPizza().removeTopping("Jalapeños");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -123,11 +131,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.beefChkBox:
                 if(checked) {
 
-                    order.addToppings("Beef");
+                    order.getCurrentPizza().addTopping("Beef");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Beef");
+                    order.getCurrentPizza().removeTopping("Beef");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -135,11 +145,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.chickenChkBox:
                 if(checked) {
 
-                    order.addToppings("Chicken");
+                    order.getCurrentPizza().addTopping("Chicken");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Chicken");
+                    order.getCurrentPizza().removeTopping("Chicken");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -147,11 +159,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.sausageChkBox:
                 if(checked) {
 
-                    order.addToppings("Sausage");
+                    order.getCurrentPizza().addTopping("Sausage");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Sausage");
+                    order.getCurrentPizza().removeTopping("Sausage");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -159,11 +173,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.pineappleChkBox:
                 if(checked) {
 
-                    order.addToppings("Pineapple");
+                    order.getCurrentPizza().addTopping("Pineapple");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Pineapple");
+                    order.getCurrentPizza().removeTopping("Pineapple");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -171,11 +187,13 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.hamChkBox:
                 if(checked) {
 
-                    order.addToppings("Ham");
+                    order.getCurrentPizza().addTopping("Ham");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Ham");
+                    order.getCurrentPizza().removeTopping("Ham");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
@@ -183,22 +201,22 @@ public class LogOrderExtraToppings extends AppCompatActivity {
             case R.id.spinachChkBox:
                 if(checked) {
 
-                    order.addToppings("Spinach");
+                    order.getCurrentPizza().addTopping("Spinach");
+                    order.getCurrentPizza().incrementCost(0.5);
                 }
                 else {
 
-                    order.removeToppings("Spinach");
+                    order.getCurrentPizza().removeTopping("Spinach");
+                    order.getCurrentPizza().incrementCost(-0.5);
                 }
 
                 break;
         }
     }
 
-    //  openPaymentSelection() method
-    //  Launches the payment selection screen
-    public void openPaymentSelection() {
+    public void openReviewOrder() {
 
-        Intent intent = new Intent(this, PaymentSelectPayment.class);
+        Intent intent = new Intent(this, LogOrderReviewOrder.class);
 
         //  Puts all order data in a Parcel to be sent to the next screen
         intent.putExtra("order_parcel_data", order);
