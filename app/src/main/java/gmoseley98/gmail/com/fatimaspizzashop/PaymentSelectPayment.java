@@ -40,6 +40,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
             public void onClick(View v) {
 
                 order.setPaymentType("Credit Card");
+                order.incrementTotalPrice(order.getTotalPrice() * 0.05);
                 openCreditCardInfo();
             }
         }));
