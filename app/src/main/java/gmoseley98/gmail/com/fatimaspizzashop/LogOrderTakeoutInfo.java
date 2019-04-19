@@ -61,16 +61,12 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         if(checked) {
-            if(order.getTotalPrice() == 0) {
 
-                order.setTotalPrice(order.getTotalPrice() + 2);
-            }
+            order.setWasLate(true);
         }
         else {
-            if(order.getTotalPrice() != 0) {
 
-                order.setTotalPrice(order.getTotalPrice() - 2);
-            }
+            order.setWasLate(false);
         }
     }
 

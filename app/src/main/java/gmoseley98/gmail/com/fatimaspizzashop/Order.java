@@ -37,7 +37,6 @@ public class Order implements Parcelable {
         paymentType = in.readString();
         orderType = in.readString();
         name = in.readString();
-        creditCard = (CreditCard) in.readValue(CreditCard.class.getClassLoader());
     }
 
     //  writeToParcel(Parcel, int) method
@@ -51,7 +50,6 @@ public class Order implements Parcelable {
         dest.writeString(orderType);
         dest.writeString(name);
         dest.writeTypedList(pizzas);
-        dest.writeValue(creditCard);
     }
 
     //  I'll be perfectly honest.
@@ -67,6 +65,7 @@ public class Order implements Parcelable {
 
         @Override
         public Order[] newArray(int size) {
+
             return new Order[size];
         }
     };
@@ -128,13 +127,6 @@ public class Order implements Parcelable {
         totalPrice += d;
     }
 
-    public void calculateTotalPrice() {
-        for(int i = 0; i < pizzas.size(); i++) {
-
-            totalPrice += pizzas.get(i).getCost();
-        }
-    }
-
     public void setOrderID(String s) {
 
         orderID = s;
@@ -163,5 +155,15 @@ public class Order implements Parcelable {
     public void setCreditCard(CreditCard c) {
 
         creditCard = c;
+    }
+
+    public void calculateTotalPrice() {
+
+        totalPrice = 0;
+
+        for(int i = 0; i < pizzas.size() - 1; i++) {
+
+            totalPrice += pizzas.get(i).getCost();
+        }
     }
 }

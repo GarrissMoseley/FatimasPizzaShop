@@ -20,12 +20,13 @@ public class LogOrderReviewOrder extends AppCompatActivity {
         setContentView(R.layout.activity_log_order_review_order);
 
         order = getIntent().getParcelableExtra("order_parcel_data");
-        order.calculateTotalPrice();
 
         addPizzaBtn = (Button) findViewById(R.id.addPizzaBtn);
         selectPaymentBtn = (Button) findViewById(R.id.selectPaymentBtn);
 
         totalCost = (TextView) findViewById(R.id.totalCostTextView);
+
+        order.calculateTotalPrice();
         totalCost.setText("Total cost: $" + order.getTotalPrice());
 
         selectPaymentBtn.setOnClickListener((new View.OnClickListener() {

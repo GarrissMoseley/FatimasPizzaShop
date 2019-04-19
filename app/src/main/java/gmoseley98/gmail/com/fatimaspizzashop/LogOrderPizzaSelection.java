@@ -50,6 +50,8 @@ public class LogOrderPizzaSelection extends AppCompatActivity {
         //  more coding involved, it would be faster than Serializable)
         order = getIntent().getParcelableExtra("order_parcel_data");
 
+        order.addPizza();
+
         //  Sets the pizza type RadioGroup and RadioButtons
         //  to their XML counterparts
         pizzaTypeRadGroup = (RadioGroup) findViewById(R.id.pizzaTypeRadGroup);
