@@ -29,6 +29,14 @@ public class LogOrderReviewOrder extends AppCompatActivity {
         order.calculateTotalPrice();
         totalCost.setText("Total cost: $" + order.getTotalPrice());
 
+        addPizzaBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openPizzaSelection();
+            }
+        }));
+
         selectPaymentBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +44,15 @@ public class LogOrderReviewOrder extends AppCompatActivity {
                 openPaymentSelection();
             }
         }));
+    }
+
+    public void openPizzaSelection() {
+
+        Intent intent = new Intent(this, LogOrderPizzaSelection.class);
+
+        intent.putExtra("order_parcel_data", order);
+
+        startActivity(intent);
     }
 
     public void openPaymentSelection() {
