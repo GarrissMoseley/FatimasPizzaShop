@@ -37,6 +37,12 @@ public class Order implements Parcelable {
         paymentType = in.readString();
         orderType = in.readString();
         name = in.readString();
+        if (in.readByte() == 0x01) {
+            pizzas = new ArrayList<Pizza>();
+            in.readList(pizzas, Pizza.class.getClassLoader());
+        } else {
+            pizzas = null;
+        }
     }
 
     //  writeToParcel(Parcel, int) method
@@ -49,7 +55,12 @@ public class Order implements Parcelable {
         dest.writeString(paymentType);
         dest.writeString(orderType);
         dest.writeString(name);
-        dest.writeTypedList(pizzas);
+        if (pizzas == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(pizzas);
+        }
     }
 
     //  I'll be perfectly honest.
@@ -161,7 +172,7 @@ public class Order implements Parcelable {
 
         totalPrice = 0;
 
-        for(int i = 0; i < pizzas.size() - 1; i++) {
+        for(int i = 0; i < pizzas.size(); i++) {
 
             totalPrice += pizzas.get(i).getCost();
         }
