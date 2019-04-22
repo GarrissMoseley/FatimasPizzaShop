@@ -22,6 +22,8 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
     //  Creates an uninitialized CreditCard object
     private CreditCard creditCard;
 
+    private DatabaseHelper dbHelp;
+
     //  Creates uninitialized String objects for card number, name on card,
     //  security number, and expiration
     private String cardNum, name, securityNum, expDate;
@@ -38,6 +40,8 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_credit_card_info);
+
+        dbHelp = new DatabaseHelper(this);
 
         //  Receives info from the previous activity from the Parcel
         //  and stores it in 'order'
@@ -74,6 +78,13 @@ public class PaymentCreditCardInfo extends AppCompatActivity {
             Intent intent = new Intent(this, HomeScreen.class);
 
             /*  Insert database implementation here  */
+            String totalPrice = order.getTotalPrice() + "";
+            String numPizzas = order.getPizzas().size() + "";
+
+            dbHelp.insertOrderInfo(totalPrice,
+                    order.getPaymentType(),
+                    numPizzas,
+                    order.getOrderType());
 
             Toast.makeText(getApplicationContext(),
                     "Order successfully logged",

@@ -20,6 +20,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
 
     //  Creates an uninitialized Order object
     private Order order;
+    private DatabaseHelper dbHelp;
 
     private Button creditCardBtn, cashBtn;
 
@@ -27,6 +28,8 @@ public class PaymentSelectPayment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_select_payment);
+
+        dbHelp = new DatabaseHelper(this);
 
         //  Receives info from the previous activity from the Parcel
         //  and stores it in 'order'
@@ -68,7 +71,14 @@ public class PaymentSelectPayment extends AppCompatActivity {
 
         Intent intent = new Intent(this, LogOrderMain.class);
 
+        String totalPrice = order.getTotalPrice() + "";
+        String numPizzas = order.getPizzas().size() + "";
+
         /*  Insert database implementation here  */
+        dbHelp.insertOrderInfo(totalPrice,
+                order.getPaymentType(),
+                numPizzas,
+                order.getOrderType());
 
         Toast.makeText(getApplicationContext(),
                 "Order successfully logged",
