@@ -7,11 +7,10 @@
 package gmoseley98.gmail.com.fatimaspizzashop;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,8 +24,6 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
     //  for customer name and phone number
     private EditText nameEditText, phoneNumberEditText;
 
-    private CheckBox wasLateCheckBox;
-
     //  Creates an uninitialized Button object
     private Button nextBtn;
 
@@ -39,8 +36,6 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         //  to the corresponging XML objects
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
-
-        wasLateCheckBox = (CheckBox) findViewById(R.id.wasLateCheckBox);
 
         //  Sets the Button object equal to the corresponding XML object
         nextBtn = (Button) findViewById(R.id.nextBtn);
@@ -56,19 +51,6 @@ public class LogOrderTakeoutInfo extends AppCompatActivity {
         });
     }
 
-    public void onCheckboxClicked(View view) {
-
-        boolean checked = ((CheckBox) view).isChecked();
-
-        if(checked) {
-
-            order.setWasLate(true);
-        }
-        else {
-
-            order.setWasLate(false);
-        }
-    }
 
     //  openPizzaSelection() method
     //  First checks that all fields are filled

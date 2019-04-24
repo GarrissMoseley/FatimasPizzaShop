@@ -13,7 +13,6 @@ public class TakeOut extends Order {
     //  Additional attribute for TakeOut object:
     //  customer phone number
     private String phoneNumber;
-    private boolean wasLate;
 
     //  Default constructor
     public TakeOut() {
@@ -28,7 +27,6 @@ public class TakeOut extends Order {
 
         super(in);
         phoneNumber = in.readString();
-        wasLate = in.readByte() != 0;
     }
 
     //  writeToParcel(Parcel, int) method
@@ -38,7 +36,6 @@ public class TakeOut extends Order {
 
         super.writeToParcel(dest, flags);
         dest.writeString(phoneNumber);
-        dest.writeByte((byte) (wasLate ? 1 : 0));
     }
 
     //  Mystery Object: Revolutions
@@ -59,10 +56,6 @@ public class TakeOut extends Order {
         phoneNumber = s;
     }
 
-    public void setWasLate(Boolean b) {
-
-        wasLate = b;
-    }
 
     //  Phone number getter
     public String getPhoneNumber() {
@@ -70,19 +63,11 @@ public class TakeOut extends Order {
         return phoneNumber;
     }
 
-    public boolean getWasLate() {
-
-        return wasLate;
-    }
 
     @Override
     public void calculateTotalPrice() {
 
         super.calculateTotalPrice();
 
-        if(wasLate) {
-
-            incrementTotalPrice(2);
-        }
     }
 }

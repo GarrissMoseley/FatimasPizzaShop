@@ -7,13 +7,10 @@
 package gmoseley98.gmail.com.fatimaspizzashop;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class PaymentSelectPayment extends AppCompatActivity {
@@ -69,7 +66,7 @@ public class PaymentSelectPayment extends AppCompatActivity {
 
     public void completeOrder() {
 
-        Intent intent = new Intent(this, LogOrderMain.class);
+        Intent intent = new Intent(this, HomeScreen.class);
 
         String totalPrice = order.getTotalPrice() + "";
         String numPizzas = order.getPizzas().size() + "";

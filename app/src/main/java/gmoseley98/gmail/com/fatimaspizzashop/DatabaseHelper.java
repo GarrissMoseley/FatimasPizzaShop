@@ -12,7 +12,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String ORDER_TABLE = "Orders";
 //    public static final String ORDER_ID = "order_id";
-//    public static final String MENU_ID = "menu_id";
 //    public static final String CUSTOMER_ID_ORDER = "customer_id";
     public static final String PAY_AMOUNT = "total";
     public static final String PAY_TYPE = "payment_type";
@@ -25,11 +24,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ADDRESS = "address";
     public static final String PHONE_NUM = "phone";
 
-//    public static final String PIZZA_MENU_TABLE = "Pizza_Menu";
-//    public static final String PIZZA_MENU_ID = "menu_id";
-//    public static final String PIZZA_TYPE = "type";
-//    public static final String PIZZA_SIZE = "size";
-//    public static final String PIZZA_PRICE = "price";
 
     public static final String CREDIT_CARD_TABLE = "Credit_Card";
 //    public static final String CUSTOMER_ID_CARD = "customer_id";
@@ -62,12 +56,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + PHONE_NUM + " VARCHAR ) ");
 
 
-//        db.execSQL("CREATE TABLE " + PIZZA_MENU_TABLE + " ("
-//                + PIZZA_MENU_ID + " INTEGER PRIMARY KEY, "
-//                + PIZZA_TYPE + " TEXT,"
-//                + PIZZA_SIZE + " TEXT, "
-//                + PIZZA_PRICE + " VARCHAR )");
-
         db.execSQL("CREATE TABLE " + CREDIT_CARD_TABLE + " ("
 //                + CUSTOMER_ID_CARD + " INTEGER, "
                 + CARD_NUMBER + " INTEGER,"
@@ -81,7 +69,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
         db.execSQL("DROP TABLE IF EXISTS " + ORDER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + CUSTOMER_TABLE);
-//        db.execSQL("DROP TABLE IF EXISTS " + PIZZA_MENU_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + CREDIT_CARD_TABLE);
         onCreate(db);
     }
@@ -94,7 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
 //        contentValues.put(ORDER_ID, orderId);
-//        contentValues.put(MENU_ID, menuId);
 //        contentValues.put(CUSTOMER_ID_ORDER, customerId);
         contentValues.put(PAY_AMOUNT, paymentAmount);
         contentValues.put(PAY_TYPE, payType);
@@ -118,17 +104,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-//    public boolean insertPizzaMenu(String menuId, String pizzaType, String pizzaSize, String pizzaPrice) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//
-//        contentValues.put(PIZZA_MENU_ID, menuId);
-//        contentValues.put(PIZZA_TYPE, pizzaType);
-//        contentValues.put(PIZZA_SIZE, pizzaSize);
-//        contentValues.put(PIZZA_PRICE, pizzaPrice);
-//        long result = db.insert(PIZZA_MENU_TABLE, null, contentValues);
-//        return result != -1;
-//    }
 
     public boolean insertCreditInfo(/*String customerId,*/ String cardNum, String nameOnCard, String expDate,
                                     String securityNum) {
@@ -160,16 +135,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        return cursor;
 //    }
 
-//    public Cursor readPizzaMenu(String menuId) {
-//        String[] columns = {PIZZA_MENU_TABLE, PIZZA_TYPE, PIZZA_SIZE, PIZZA_PRICE};
-//        String whereClause = PIZZA_MENU_ID + "=?";
-//        String[] whereArgs = new String[] {menuId};
-//        this.cursor = this.getReadableDatabase().query(PIZZA_MENU_TABLE, columns, whereClause,
-//                whereArgs, null, null, null);
-//        return cursor;
-//    }
+    public double deliveryRevenue() {
+        Cursor deliveryCursor = this.getReadableDatabase().rawQuery("SELECT SUM(total) FROM Orders WHERE order_type = 'Delivery'", null);
+        deliveryCursor.moveToFirst();
+        return deliveryCursor.getDouble(0);
+    }
 
+    public double takeOutRevenue() {
+        Cursor takeOutCursor = this.getReadableDatabase().rawQuery("SELECT SUM(total) FROM Orders WHERE order_type = 'Takeout'", null);
+        takeOutCursor.moveToFirst();
+        return takeOutCursor.getDouble(0);
+    }
 
-
+    public double inHouseRevenue() {
+        Cursor inHouseCursor = this.getReadableDatabase().rawQuery("SELECT SUM(total) FROM Orders WHERE order_type = 'In-House'", null);
+        inHouseCursor.moveToFirst();
+        return inHouseCursor.getDouble(0);
+    }
 
 }
